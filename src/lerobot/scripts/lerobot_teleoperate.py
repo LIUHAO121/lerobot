@@ -29,6 +29,27 @@ lerobot-teleoperate \
     --teleop.port=/dev/tty.usbmodem58760431551 \
     --teleop.id=blue \
     --display_data=true
+
+
+lerobot-teleoperate \
+    --robot.type=so101_follower \
+    --robot.port=/dev/ttyACM2 \
+    --robot.id=blue \
+    --teleop.type=so101_leader \
+    --teleop.port=/dev/ttyACM1 \
+    --teleop.id=blue 
+
+
+lerobot-teleoperate \
+    --robot.type=so101_follower \
+    --robot.port=/dev/ttyACM1 \
+    --robot.cameras="{ front: {type: opencv, index_or_path: 2, width: 640, height: 480, fps: 30}, side: {type: opencv, index_or_path: 4, width: 640, height: 480, fps: 30}}" \
+    --robot.id=blue \
+    --teleop.type=so101_leader \
+    --teleop.port=/dev/ttyACM0 \
+    --teleop.id=blue  \
+    --display_data=true
+
 ```
 
 To stream the data to Foxglove instead of Rerun, add ``--display_mode=foxglove``

@@ -25,6 +25,22 @@ train_config.json alone:
 torchrun --nproc-per-node=8 $(which lerobot-train) \
     --dataset.repo_id=... --policy.type=act \
     --parallelism.dp_shard=8 --accelerator.mixed_precision=bf16
+
+
+# type:
+lerobot-train \
+    --dataset.repo_id=dataset/grab2_20260829_145110 \
+    --policy.type=act \
+    --policy.device=cuda \
+    --output_dir=outputs/train/act_grab2 \
+    --job_name=act_grab2 \
+    --batch_size=8 \
+    --steps=8000 \
+    --wandb.enable=false \
+    --policy.push_to_hub=false
+
+
+    pip3 install lerobot[diffusion] -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 """
 

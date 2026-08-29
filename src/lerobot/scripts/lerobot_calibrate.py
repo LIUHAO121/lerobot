@@ -20,10 +20,10 @@ Requires: pip install 'lerobot[hardware]'
 Example:
 
 ```shell
-lerobot-calibrate \
-    --teleop.type=so100_leader \
-    --teleop.port=/dev/tty.usbmodem58760431551 \
-    --teleop.id=blue
+lerobot-calibrate  --teleop.type=so101_leader   --teleop.port=/dev/ttyACM0  --teleop.id=blue
+
+
+lerobot-calibrate  --robot.type=so101_follower --robot.port=/dev/ttyACM1  --robot.id=blue
 ```
 """
 

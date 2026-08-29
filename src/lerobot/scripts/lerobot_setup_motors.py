@@ -18,9 +18,10 @@ Helper to set motor ids and baudrate.
 Example:
 
 ```shell
-lerobot-setup-motors \
-    --teleop.type=so100_leader \
-    --teleop.port=/dev/tty.usbmodem575E0031751
+lerobot-setup-motors  --teleop.type=so101_leader  --teleop.port=/dev/ttyACM0
+
+lerobot-setup-motors  --robot.type=so101_follower --robot.port=/dev/ttyACM0
+
 ```
 """
 

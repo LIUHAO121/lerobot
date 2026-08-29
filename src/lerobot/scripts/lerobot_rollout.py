@@ -159,6 +159,33 @@ Usage examples
 
     # Stream to Foxglove instead of Rerun:
     # add --display_mode=foxglove, then connect the Foxglove app to ws://127.0.0.1:8765.
+
+
+lerobot-rollout \
+    --strategy.type=base \
+    --policy.path=outputs/train/act_grab2/checkpoints/last/pretrained_model \
+    --robot.type=so101_follower \
+    --robot.port=/dev/ttyACM2 \
+    --robot.id=blue \
+    --robot.cameras="{ front: {type: opencv, index_or_path: 2, width: 640, height: 480, fps: 30}, side: {type: opencv, index_or_path: 0, width: 640, height: 480, fps: 30}}" \
+    --task="Grab the cube" \
+    --duration=50 \
+    --display_data=true
+
+
+lerobot-rollout \
+    --strategy.type=episodic \
+    --policy.path=outputs/train/act_grab/checkpoints/last/pretrained_model \
+    --robot.type=so101_follower \
+    --robot.port=/dev/ttyACM1 \
+    --robot.id=blue \
+    --robot.cameras="{ front: {type: opencv, index_or_path: 2, width: 640, height: 480, fps: 30}, side: {type: opencv, index_or_path: 4, width: 640, height: 480, fps: 30}}" \
+    --dataset.repo_id=dataset/eval_grab \
+    --dataset.num_episodes=10 \
+    --dataset.single_task="Grab the cube" \
+    --dataset.push_to_hub=false \
+    --display_data=true
+
 """
 
 import logging

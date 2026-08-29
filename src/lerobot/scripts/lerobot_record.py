@@ -22,20 +22,41 @@ Requires: pip install 'lerobot[core_scripts]'  (includes dataset + hardware + vi
 Example:
 
 ```shell
-lerobot-record \\
-    --robot.type=so100_follower \\
-    --robot.port=/dev/tty.usbmodem58760431541 \\
-    --robot.cameras="{laptop: {type: opencv, index_or_path: 0, width: 640, height: 480, fps: 30}}" \\
-    --robot.id=black \\
-    --teleop.type=so100_leader \\
-    --teleop.port=/dev/tty.usbmodem58760431551 \\
-    --teleop.id=blue \\
-    --dataset.repo_id=<my_username>/<my_dataset_name> \\
-    --dataset.num_episodes=2 \\
-    --dataset.single_task="Grab the cube" \\
-    --dataset.streaming_encoding=true \\
-    --dataset.encoder_threads=2 \\
+lerobot-record \
+    --robot.type=so101_follower \
+    --robot.port=/dev/ttyACM2 \
+    --robot.cameras="{ front: {type: opencv, index_or_path: 2, width: 640, height: 480, fps: 30}, side: {type: opencv, index_or_path: 0, width: 640, height: 480, fps: 30}}" \
+    --robot.id=blue \
+    --teleop.type=so101_leader \
+    --teleop.port=/dev/ttyACM1 \
+    --teleop.id=blue \
+    --dataset.repo_id=dataset/grab2 \
+    --dataset.num_episodes=20 \
+    --dataset.single_task="Grab the cube 2" \
+    --dataset.streaming_encoding=true \
+    --dataset.encoder_threads=2 \
+    --dataset.episode_time_s=30 \
+    --dataset.reset_time_s=10 \
+    --dataset.push_to_hub=false \
     --display_data=true
+
+# 补充数据
+lerobot-record \
+    --robot.type=so101_follower --robot.port=/dev/ttyACM1 --robot.id=blue \
+    --teleop.type=so101_leader --teleop.port=/dev/ttyACM0 --teleop.id=blue \
+    --robot.cameras="{ front: {type: opencv, index_or_path: 2, width: 640, height: 480, fps: 30}, side: {type: opencv, index_or_path: 4, width: 640, height: 480, fps: 30}}" \
+    --dataset.repo_id=dataset/grab_20260823_160233 \
+    --dataset.root=$HOME/.cache/huggingface/lerobot/dataset/grab_20260823_160233 \
+    --dataset.single_task="Grab the cube" \
+    --dataset.num_episodes=10 \
+    --dataset.streaming_encoding=true \
+    --dataset.encoder_threads=2 \
+    --dataset.episode_time_s=30 \
+    --dataset.reset_time_s=10 \
+    --dataset.push_to_hub=false \
+    --resume=true \
+    --display_data=true
+
 ```
 
 To stream the data to Foxglove instead of Rerun, add ``--display_mode=foxglove`` (then connect the
